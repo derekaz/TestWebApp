@@ -76,10 +76,11 @@ jobs:
       if: ${{ github.ref == 'refs/heads/main' }}
       uses: peaceiris/actions-gh-pages@v3.7.3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.PERSONAL_TOKEN }}
+        external_repository: derekaz/docs
         publish_branch: main
         publish_dir: ./pw-report/
-        destination_dir: docs
+        destination_dir: docs/${{ github.repository }}
       # with:
       #   external_repository: mspnp/intern-js-pipeline
       #   # publish_branch: gh-pages
