@@ -17,9 +17,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-env:
-  NODE_VERSION: '16.x'
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   test:
@@ -35,8 +32,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
-      # with:
-      #   node-version: ${{ env.NODE_VERSION }}
+      with:
+        node-version: ${{ matrix.version }}
     # - name: npmi
     #   run: npm i
     - name: Install dependencies
@@ -76,17 +73,21 @@ jobs:
       uses: actions/download-artifact@v3
       id: download
     - name: Publish to external repo
-      if: always()
+      if: ${{ github.ref == 'refs/heads/main' }}
       uses: peaceiris/actions-gh-pages@v3.7.3
       with:
-        external_repository: mspnp/intern-js-pipeline
-        publish_branch: gh-pages
-        personal_token: ${{ secrets.PAT_TOKEN }}
-        publish_dir: ${{steps.download.outputs.download-path}}
-        destination_dir: test-reports/${{ github.repository }}
-        keep_files: true
-        user_name: "github-actions[bot]"
-        user_email: "github-actions[bot]@users.noreply.github.com"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs      # with:
+      #   external_repository: mspnp/intern-js-pipeline
+      #   # publish_branch: gh-pages
+      #   publish_branch: main
+      #   personal_token: ${{ secrets.PAT_TOKEN }}
+      #   publish_dir: ${{steps.download.outputs.download-path}}
+      #   # destination_dir: test-reports/${{ github.repository }}
+      #   destination_dir: main
+      #   keep_files: true
+      #   user_name: "github-actions[bot]"
+      #   user_email: "github-actions[bot]@users.noreply.github.com"
 
   notify-dashboard:
     name: Notify Dashboard
