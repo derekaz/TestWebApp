@@ -79,7 +79,7 @@ jobs:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         external_repository: derekaz/docs
         publish_branch: main
-        publish_dir: ./pw-report/
+        publish_dir: pw-report/
         destination_dir: docs/${{ github.repository }}
       # with:
       #   external_repository: mspnp/intern-js-pipeline
