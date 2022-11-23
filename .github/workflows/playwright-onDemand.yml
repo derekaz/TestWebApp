@@ -36,8 +36,8 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: ${{ env.NODE_VERSION }}
-    # - name: npmi8
-    #   run: npm i -g npm@8
+    - name: npmi
+      run: npm i
     - name: Install dependencies
       run: npm ci
       # env: 
