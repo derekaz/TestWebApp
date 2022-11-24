@@ -15,16 +15,16 @@ jobs:
     runs-on: ubuntu-20.04
 
 
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x, 18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    # strategy:
+    #   matrix:
+    #     node-version: [14.x, 16.x, 18.x]
+    #     # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.version }}
+      # with:
+      #   node-version: ${{ matrix.version }}
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright
@@ -60,31 +60,38 @@ jobs:
       if: always()
       uses: peaceiris/actions-gh-pages@v3.7.3
       with:
-        external_repository: mspnp/intern-js-pipeline
-        publish_branch: gh-pages
-        personal_token: ${{ secrets.PAT_TOKEN }}
-        publish_dir: ${{steps.download.outputs.download-path}}
-        destination_dir: test-reports/${{ github.repository }}
-        keep_files: true
-        user_name: "github-actions[bot]"
-        user_email: "github-actions[bot]@users.noreply.github.com"
+        external_repository: derekaz/docs
+        publish_branch: main
+        publish_dir: ${{steps.download.outputs.download-path}}/onDemand #-${{ matrix.node-version }}
+        destination_dir: ${{ github.repository }}/tests
+        keep_files: false
 
-  notify-dashboard:
-    name: Notify Dashboard
-    if: ${{ always() }}
-    needs: [test, storeReports]
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+      # with:
+      #   external_repository: mspnp/intern-js-pipeline
+      #   publish_branch: gh-pages
+      #   personal_token: ${{ secrets.PERSONAL_TOKEN }}
+      #   publish_dir: ${{steps.download.outputs.download-path}}
+      #   destination_dir: test-reports/${{ github.repository }}
+      #   keep_files: true
+      #   user_name: "github-actions[bot]"
+      #   user_email: "github-actions[bot]@users.noreply.github.com"
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+  # notify-dashboard:
+  #   name: Notify Dashboard
+  #   if: ${{ always() }}
+  #   needs: [test, storeReports]
+  #   # The type of runner that the job will run on
+  #   runs-on: ubuntu-latest
 
-      # Runs a single command using the runners shell
-      - name: Notify dashboard repo
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          gh api repos/mspnp/intern-js-pipeline/dispatches \
-              --raw-field event_type=rebuild-site
+  #   # Steps represent a sequence of tasks that will be executed as part of the job
+  #   steps:
+  #     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+  #     - uses: actions/checkout@v3
+
+  #     # Runs a single command using the runners shell
+  #     - name: Notify dashboard repo
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+  #       run: |
+  #         gh api repos/mspnp/intern-js-pipeline/dispatches \
+  #             --raw-field event_type=rebuild-site
