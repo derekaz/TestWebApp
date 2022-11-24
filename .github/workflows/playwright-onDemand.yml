@@ -26,7 +26,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x] #[14.x, 16.x, 18.x]
+        node-version: [14.x, 16.x, 18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -60,7 +60,7 @@ jobs:
           TAG_NAME: test-report-${{ matrix.node-version }}-${{ steps.date.outputs.date }}
       if: always()
       with: 
-        name: onDemand-${{ matrix.node-version }}
+        name: onDemand #-${{ matrix.node-version }}
         path: pw-report/
 
   storeReports:
@@ -69,10 +69,10 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x] #[14.x, 16.x, 18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    # strategy:
+    #   matrix:
+    #     node-version: [16.x] #[14.x, 16.x, 18.x]
+    #     # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - name: Download all workflow run artifacts
@@ -87,7 +87,7 @@ jobs:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         external_repository: derekaz/docs
         publish_branch: main
-        publish_dir: ${{steps.download.outputs.download-path}}/onDemand-${{ matrix.node-version }}
+        publish_dir: ${{steps.download.outputs.download-path}}/onDemand #-${{ matrix.node-version }}
         destination_dir: ${{ github.repository }}/tests
         keep_files: false
       # with:
