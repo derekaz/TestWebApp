@@ -73,7 +73,7 @@ jobs:
       uses: actions/download-artifact@v3
       id: download
     - name: ls
-      uses: ls -l
+      run: ls -l
     - name: Publish to external repo
       if: ${{ github.ref == 'refs/heads/main' }}
       uses: peaceiris/actions-gh-pages@v3.7.3
