@@ -82,7 +82,7 @@ jobs:
         external_repository: derekaz/docs
         publish_branch: main
         publish_dir: ${{steps.download.outputs.download-path}}/onDemand
-        destination_dir: ${{ github.repository }}
+        destination_dir: ${{ github.repository }}/tests
         keep_files: false
       # with:
       #   external_repository: mspnp/intern-js-pipeline
