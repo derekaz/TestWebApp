@@ -81,7 +81,7 @@ jobs:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         external_repository: derekaz/docs
         publish_branch: main
-        publish_dir: ${{steps.download.outputs.download-path}}/onDemand-*
+        publish_dir: ${{steps.download.outputs.download-path}}/onDemand-*.*
         destination_dir: ${{ github.repository }}/tests
         keep_files: false
       # with:
