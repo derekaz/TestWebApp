@@ -82,7 +82,7 @@ jobs:
       run: ls -l
     - name: Publish to external repo
       if: ${{ github.ref == 'refs/heads/main' }}
-      uses: peaceiris/actions-gh-pages@v3.7.3
+      uses: peaceiris/actions-gh-pages@v3
       with:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         external_repository: derekaz/docs
