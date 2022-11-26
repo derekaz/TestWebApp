@@ -86,10 +86,10 @@ jobs:
       with:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         external_repository: derekaz/docs
-        publish_branch: main
+        publish_branch: gh-pages
         publish_dir: ${{steps.download.outputs.download-path}}/onDemand #-${{ matrix.node-version }}
-        destination_dir: ${{ github.repository }}/tests
-        keep_files: false
+        destination_dir: projectInfo/test-reports/${{ github.repository }}
+        keep_files: true
       # with:
       #   external_repository: mspnp/intern-js-pipeline
       #   # publish_branch: gh-pages
