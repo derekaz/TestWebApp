@@ -95,4 +95,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         run: |
           gh api repos/derekaz/docs/dispatches \
-              --raw-field event_type=rebuild-site
+              --raw-field event_type=rebuild-docs-site
