@@ -63,7 +63,7 @@ jobs:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         external_repository: derekaz/docs
         publish_branch: gh-pages
-        publish_dir: ${{steps.download.outputs.download-path}}/onDemand #-${{ matrix.node-version }}
+        publish_dir: ${{steps.download.outputs.download-path}} #/onDemand #-${{ matrix.node-version }}
         destination_dir: projectInfo/test-reports/${{ github.repository }}
         keep_files: true
 
