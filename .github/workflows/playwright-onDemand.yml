@@ -56,8 +56,8 @@ jobs:
       run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
     - name: Upload HTML report as Artifact
       uses: actions/upload-artifact@v3
-      env:
-          TAG_NAME: test-report-${{ steps.date.outputs.date }}
+      # env:
+      #     TAG_NAME: test-report-${{ steps.date.outputs.date }}
       if: always()
       with: 
         name: onDemand #-${{ matrix.node-version }}
@@ -87,7 +87,7 @@ jobs:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         external_repository: derekaz/docs
         publish_branch: gh-pages
-        publish_dir: ${{steps.download.outputs.download-path}}/onDemand #-${{ matrix.node-version }}
+        publish_dir: ${{steps.download.outputs.download-path}} #/onDemand #-${{ matrix.node-version }}
         destination_dir: projectInfo/test-reports/${{ github.repository }}
         keep_files: true
       # with:
