@@ -36,6 +36,8 @@ jobs:
       #   node-version: ${{ matrix.node-version }}
     # - name: npmi
     #   run: npm i
+    - name: Update runner
+      run: sudo apt-get update
     - name: Install dependencies
       run: npm ci
       # env: 
