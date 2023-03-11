@@ -5,7 +5,7 @@
     "node": ">=16.0.0 <17.0.0"
   },
   "scripts": {
-    "start": "swa start http://localhost:5000 --run \"dotnet run --project Client/Client.csproj\" --api-location http://127.0.0.1:7071",
+    "start": "swa start http://localhost:5000 --run \"dotnet run --project Client/Client.csproj\" --api-location Api --verbose=silly",
     "playwright_test": "playwright test"
   },
   "devDependencies": {
